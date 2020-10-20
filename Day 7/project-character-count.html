@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Character Count</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+
+		label {
+			display: block;
+			width: 100%;
+		}
+
+		textarea {
+			min-height: 24em;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Character Count</h1>
+
+	<label for="text">Enter your text below.</label>
+	<textarea id="text"></textarea>
+
+	<p>You've written <strong><span id="character-count">0</span> characters</strong>.</p>
+
+	<script>
+		
+		// Listen for any changes in "textarea"
+		document.addEventListener('input', function() {
+			if (event.target.matches("textarea")) {
+				
+				//get the text out of the textarea
+				var elemAll = document.getElementById("text").value;
+				
+				//count the string length of the text area
+				var ccount = elemAll.length;
+				
+				//find the value character-count
+				var cc = document.querySelector('#character-count');
+				
+				//...and set its content to the string length of the text area
+				cc.textContent = ccount;
+			} else {
+				return;
+				}	
+		}, false);
+
+	</script>
+</body>
+</html>
