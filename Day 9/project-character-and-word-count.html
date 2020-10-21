@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Character & Word Count</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+
+		label {
+			display: block;
+			width: 100%;
+		}
+
+		textarea {
+			min-height: 24em;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Character & Word Count</h1>
+
+	<label for="text">Enter your text below.</label>
+	<textarea id="text"></textarea>
+
+	<p>You've written <strong><span id="word-count">0</span> words</strong> and <strong><span id="character-count">0</span> characters</strong>.</p>
+
+	<script>
+		// Find text in text area
+        var textAll = document.querySelector('#text');
+
+        //FInd the "word-count" and "character-count" place holder
+        var wcount = document.querySelector('#word-count');
+        var ccount = document.querySelector('#character-count');
+
+
+        //Listen for input events in the textarea "text"
+        textAll.addEventListener('input', function() {
+          
+                //count characters in textarea
+                var c = text.value;
+                var cc = text.value.length;
+
+                //convert text string into an Array using space as delimiter to separate words
+                var wArr = c.split(/\s/);
+                
+                //Eliminate ., white space, hard returns, etc from word count
+                var selectArr = wArr.filter(Boolean);
+
+                //count elements in word array
+                wc = selectArr.length;
+
+                //set character count cc to 
+                ccount.textContent = cc;
+                wcount.textContent = wc;
+         
+        }, false);
+	</script>
+</body>
+</html>
