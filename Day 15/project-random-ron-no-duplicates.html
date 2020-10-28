@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Ron - No Duplicates</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+
+		img {
+			height: auto;
+			max-width: 100%;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Random Ron - No Duplicates</h1>
+
+	<img alt="A photo of Ron Swanson" src="http://giphygifs.s3.amazonaws.com/media/iofbYa67AbBg4/giphy.gif">
+
+	<blockquote id="quote" aria-live="polite">
+		<em>Getting a fresh quote...</em>
+	</blockquote>
+
+	<p>
+		<button id="get-quote">More Ron</button>
+	</p>
+
+	<script>
+		// Get the blockquote and button elements
+		var quote = document.querySelector('#quote');
+		var btn = document.querySelector('#get-quote');
+        var ronArray = [];
+        var duplicates = 0;
+
+
+		// Get a fresh quote and render it into the DOM
+		var getQuote = function () {
+			// Get a Ron Swanson quote
+			fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
+				if (response.ok) {
+					return response.json();
+				} else {
+					return Promise.reject(response);
+				}
+			}).then(function (data) {
+				
+                //check if the new quote already exist in the Array
+                if (ronArray.indexOf(data[0]) < 0) {
+                    
+                    //just for confirmmation show "-1"
+                    console.log(ronArray.indexOf(data[0]));
+                    
+                    //push the new unrepeated quote into the Array as long as the array contains less than 50 quotes
+                    if (ronArray.length < 50) {
+                        ronArray.push(data[0]);
+                    } else {
+                        
+                        //once 50 quotes are in the Array, start overwriting the oldest one
+                        ronArray.shift();
+                    }
+                } else {
+                    //count doubled (but erased) quotes to confirm duplicates are "dealt" with
+                    ++duplicates;
+                    getQuote();
+                }
+                quote.textContent = data[0];
+                
+                //show the number of would-be doubles
+                console.log('Would-be Duplicates: ' + duplicates);
+                //show Length of Array
+                console.log('Number of quotes in Array: ' + ronArray.length);
+                //show entire array
+                console.log('Quotes: ' + ronArray);
+
+			}).catch(function (error) {
+				quote.textContent = '[Something went wrong, sorry!] I have a joke for you... The government in this town is excellent, and uses your tax dollars efficiently.';
+			});
+		};
+		// Get a quote on page load
+		getQuote();
+
+		// Get a quote when the #get-quote button is clicked
+		btn.addEventListener('click', getQuote, false);
+	</script>
+</body>
+</html>
