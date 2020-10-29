@@ -45,7 +45,9 @@
 
            // a) - convert array in "list array" using map() method
            var a = nytStories.map(function (nytStory) {
-            return '<li> <a href="' + nytStory.url + '">' + nytStory.title + '</a></li>';
+            return '<h2> <a href="' + nytStory.url + '">' + nytStory.title + '</a></h2>' +
+                    '<p>' + nytStory.byline + '</p>'  +
+                    '<p>' + nytStory.abstract + '</p>';
             //console.log(a);
             });
 
