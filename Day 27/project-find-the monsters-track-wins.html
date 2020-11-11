@@ -43,7 +43,7 @@
 
         [reload] {
             background-color: #4CAF50; /* Green */
-            border: none;
+            border: thin;
             color: white;
             padding: 15px 32px;
             text-align: center;
@@ -141,11 +141,10 @@
             console.log('click: ' + click);
             console.log('Monster ID: ' + monsters[id]);
             if (monsters[id] == 'sock') {
-                console.log('You lost');
                 tryAgain();
-            
                 } else {
                     if (click === 11) {
+                        winner();
                         console.log('You won')
                     }
                 }
@@ -188,6 +187,19 @@
 		// Listen for click events
 		document.addEventListener('click', clickHandler, false);
         
+        //function: to display when getting all monsters and not the sock
+        function winner() {
+            app.innerHTML = 
+                        '<h1>You WON!!!</h1>' +
+                        '<p></p>' +
+                        '<h3>Would you like to try again?</h3>' +
+                        '<button reload id ="Reload">Reload</button>';
+            document.addEventListener('click', function() {
+                if (event.target.matches('[reload]')) {
+                    location.reload();
+                } else {return}
+            });             
+        }
 
         //Funcion to display Button "Try again?" and reload game
         function tryAgain() {
