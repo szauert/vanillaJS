@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather App</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 30em;
+			width: 88%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Weather App</h1>
+
+	<div id="app">Checking the weather near you...</div>
+
+	<script>
+		// Variables
+        var locationURL = 'https://ipapi.co/json';
+        var appKey = '3091e3618ce841fab21fb22a790f4c1e';
+        
+
+        //Fetch current location
+        fetch(locationURL)
+            .then(function (response) {
+            //check if API call was sucessful
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject(response);
+                }
+            })
+            .then(function (location) {
+                console.log(location);
+                let lat = location.latitude;
+                let long = location.longitude;
+                let appCwUrl = 'https://api.weatherbit.io/v2.0/current?lat='+lat+'&lon='+long+'&key=';
+                console.log('Latitude: ' + lat);
+                console.log('Longitude: ' + long);
+                
+                fetch(appCwUrl + appKey)
+                .then(function (weather) {
+                    if (weather.ok) {
+                        return weather.json();
+                    } else {
+                        return Promise.reject(weather);
+                    }
+                })
+                .then(function (report) {
+                    console.log('Weather Report for: ' + report.data[0].city_name + ', ' + report.data[0].state_code + ' ,' + report.data[0].country_code);
+                    console.log('Lattitude: ' + lat.toFixed(2) + '  /   Longitude: ' + long.toFixed(2));
+                    console.log('Station Code: ' + report.data[0].station);
+                    console.log('Last Observation UTC Time: ' + (new Date(report.data[0].ob_time).toLocaleString()));
+                    let utcTime = new Date(report.data[0].ob_time);
+                    console.log('UTC Time: ' + utcTime);
+                    console.log('UTC Time in ms: ' + (utcTime.getTime()));
+                    //console.log('Last Observation UTC Time in ms: ' + (report.data[0].ob_time).getTime());
+                    console.log('------------------------------------------------');
+                    console.log('');
+    
+                    console.log('Temperature: ' + (((report.data[0].temp) * 1.8) + 32).toFixed(1));
+                    console.log('Relative Humidity: ' + report.data[0].rh);
+                    console.log('Dew Point: ' + (((report.data[0].dewpt) * 1.8) + 32).toFixed(1));
+                    console.log('Pressure: ' + report.data[0].pres);
+                    console.log('Sea Level Pressure: ' + report.data[0].slp);
+                    console.log('Wind Direction: ' + report.data[0].wind_dir);
+                    console.log('Wind Speed: ' + ((report.data[0].wind_spd) * 2.2369).toFixed(1) + 'mph');
+                    console.log('Estimated Solar Radiation: ' + report.data[0].solar_rad + 'W/m^2');
+                    console.log('UV-Index: ' + report.data[0].uv);
+                    console.log('');
+                    console.log('Air Qulaity Index: ' + report.data[0].aqi);
+                    console.log(report.data[0]);
+                })
+            })
+            .catch(function (err) {
+                //There was an error
+                console.warn('Somethin aint right', err);
+            }); 
+           /*
+            .then(function (nytStories) {
+                //nytStories is JSON from the response - call function showStories to convert data array into HTML
+                showStories(nytStories.results);
+            })
+            .catch(function (err) {
+                //There was an error
+                console.warn('Somethin aint right', err);
+        });
+        */
+    
+
+	</script>
+</body>
+</html>
