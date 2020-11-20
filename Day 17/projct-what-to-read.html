@@ -26,6 +26,7 @@
             .then(function (response) {
             //check if API call was sucessful
                 if (response.ok) {
+                    console.log(response);
                     return response.json();
                 } else {
                     return Promise.reject(response);
@@ -33,7 +34,9 @@
             })
             .then(function (nytStories) {
                 //nytStories is JSON from the response - call function showStories to convert data array into HTML
+                
                 showStories(nytStories.results);
+                
             })
             .catch(function (err) {
                 //There was an error
