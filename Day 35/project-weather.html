@@ -88,7 +88,8 @@
 
                 // a) - convert array in "list array" using map() method
                 var a = weather.data.map(function (weather) {
-                    return '<h2>' + ' Weather Report for: ' + weather.city_name + ', ' + weather.state_code + ' (' + weather.country_code + ')' + '</h2>' +
+                    return '<p>' +'<img src="https://www.weatherbit.io/static/img/icons/' + weather.weather.icon + '.png">' + '</p>' +
+                            '<h2>' + ' Weather Report for: ' + weather.city_name + ', ' + weather.state_code + ' (' + weather.country_code + ')' + '</h2>' +
                             
                             // Show Station coordinates as Google Maps hyperlink and open in new tab
                             '<p> <a href="' + 'https://maps.google.com/?q=' + weather.lat + ',' + weather.lon + '"target="_blank">' + 'Lat: ' + weather.lat.toFixed(3) + 'deg / Long: ' + weather.lon.toFixed(3) + 'deg  (Station Code: ' + weather.station + ')' + '</a></p>'  + 
