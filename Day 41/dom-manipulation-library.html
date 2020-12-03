@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM Manipulation Library</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+		}
+
+
+		.btn-blue {
+			background-color: #0088cc;
+			color: #ffffff;
+		}
+
+		.btn-purple {
+			background-color: rebeccapurple;
+			color: #ffffff;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>DOM Manipulation Library</h1>
+
+	<p>All of the fun here happens in the console.</p>
+
+	<p>
+		<button class="btn-blue" id="button-1">Button 1</button>
+		<button class="btn-blue" id="button-2">Button 2</button>
+		<button class="btn-blue" id="button-3">Button 3</button>
+	</p>
+
+	<ul>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
+
+	<script>
+		// Create our public method
+        var $ = (function() {
+            
+            
+            // Create Constructor
+            var Constructor = function (selector) {
+
+                this.elements = document.querySelectorAll(selector);
+            }
+
+            // Get a public copy of the Array of elements
+            Constructor.prototype.getArray = function () {
+                return Array.prototype.slice.call(this.elements);
+            }
+
+
+            //Get the first item of the list
+            Constructor.prototype.first = function() {
+                return this.elements[0];
+            }
+
+            //Get the last itme of the list
+            Constructor.prototype.last = function() {
+                return this.elements[this.elements.length - 1];
+            }
+            
+            // Add a class to all elements in an array
+            Constructor.prototype.addClass = function (className) {
+                this.getArray().forEach(function (elem) {
+                    elem.classList.add(className);
+                })
+            }
+
+            //Remove a class from all elements in an array
+            Constructor.prototype.removeClass = function (className) {
+                this.getArray().forEach(function (elem) {
+                    elem.classList.remove(className);
+                })
+            }
+
+            return Constructor;
+
+        })();
+
+        // Create variables using the Constructor
+
+        var btns = new $('button');
+        var list = new $('ul')
+
+        console.log(btns);
+        console.log(btns.elements);
+        console.log(btns.getArray());
+        console.log(btns.first());
+        console.log(btns.last());
+
+        console.log(list.elements);
+
+        //Add purple to buttons - $.addClass
+        btns.addClass('btn-purple');
+
+        //Remove blue from buttons - $removeClass
+        //btns.removeClass('btn-blue');
+
+	</script>
+</body>
+</html>

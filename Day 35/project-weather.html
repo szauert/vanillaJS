@@ -100,8 +100,8 @@
                             '<p>' + 'Temp: ' + (((weather.temp) * 1.8) + 32).toFixed(1) + 'F' + '</p>' +
                             '<p>' + 'Dew Point: ' + (((weather.dewpt) * 1.8) + 32).toFixed(1) + 'F' + '</p>' +
                             '<p>' + 'Relative Humidity: ' + weather.rh + '%' + '</p>' +
-                            '<p>' + 'Pressure: ' + weather.pres.toFixed(1) + ' mb' + '</p>' +
-                            '<p>' + 'Sea Level Pressure: ' + weather.slp.toFixed(1) + ' mb' + '</p>' +
+                            '<p>' + 'Pressure: ' + weather.pres.toFixed(1) + ' mb' + ' (' + ((weather.pres)/33.864).toFixed(2) + 'inHg)' + '</p>' +
+                            '<p>' + 'Sea Level Pressure: ' + weather.slp.toFixed(1) + ' mb' + ' (' + ((weather.slp)/33.864).toFixed(2) + 'inHg)' + '</p>' +
                             '<p>' + 'Wind Direction: ' + weather.wind_dir + ' (from ' + weather.wind_cdir + ')' + '</p>' +
                             '<p>' + 'Wind Speed: ' + ((weather.wind_spd) * 2.2369).toFixed(1) + 'mph' + '</p>' +
                             '<p>' + 'Estimated Solar Radiation: ' + weather.solar_rad + 'W/m^2' + '</p>' +
