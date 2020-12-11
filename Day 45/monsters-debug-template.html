@@ -207,8 +207,8 @@
 			// If not, it's not a monster
 			// return and stop running our callback function
 			
-			// @bug - WRONG: missing square brackets in CSS 'data-monster-id'
-			// var monster = event.target.closest('data-monster-id');
+			// @bug - missing square brackets in CSS 'data-monster-id'
+			// WRONG: var monster = event.target.closest('data-monster-id');
 			var monster = event.target.closest('[data-monster-id]');
 			
 			console.log('Monster: ' + monster);
