@@ -21,7 +21,7 @@
 		// Variables
         var locationURL = 'https://ipapi.co/json';
         var appKey = '3091e3618ce841fab21fb22a790f4c1e';
-        
+        var ip;
 
         //Fetch current location
         fetch(locationURL)
@@ -37,6 +37,7 @@
                 console.log(location);
                 let lat = location.latitude;
                 let long = location.longitude;
+                ip = location.ip;
                 let appCwUrl = 'https://api.weatherbit.io/v2.0/current?lat='+lat+'&lon='+long+'&key=';
                 //console.log('Latitude: ' + lat);
                 //console.log('Longitude: ' + long);
@@ -107,7 +108,8 @@
                             '<p>' + 'Estimated Solar Radiation: ' + weather.solar_rad + 'W/m^2' + '</p>' +
                             '<p>' + 'UV-Index: ' + weather.uv + '</p>' +
                             '<p>' + 'Solar Elevation Angle: ' + weather.elev_angle + ' deg' + '</p>' +
-                            '<p>' + 'Solar Hour Angle: ' + weather.h_angle + ' deg' + '</p>';
+                            '<p>' + 'Solar Hour Angle: ' + weather.h_angle + ' deg' + '</p>' +
+                            '<p>' + 'Your IP address: ' + ip + '</p>';
 
                             //Just for testing and troubleshooting purposes
                                 // console.log('Dew Point: ' + (((report.data[0].dewpt) * 1.8) + 32).toFixed(1) + 'F');
