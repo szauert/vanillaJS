@@ -56,7 +56,7 @@
         var startCounter = function () {
             app.data.timer = duration;
             console.log('initital timer: ' + app.data.timer);
-            // app.render();
+            app.render();
             repeat = window.setInterval(countDown, 1000);
         };
 
@@ -64,6 +64,13 @@
             window.clearInterval(repeat);
             // app.render();
             // app.data.timer = duration;
+        };
+
+        var clickHandler = function () {
+            if (!event.target.hasAttribute('timer-restart')) return;
+
+            startCounter();
+
         };
 
         // Create new object using "new Constructor"
@@ -83,7 +90,7 @@
                 console.log('app: ' + app); 
 
         startCounter();
-        
+        document.addEventListener('click', clickHandler);
 
 	</script>
 </body>
