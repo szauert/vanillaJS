@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timer</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			text-align: center;
+			width: 88%;
+		}
+		.button {
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			}
+	</style>
+</head>
+<body>
+
+	<h1>Timer</h1>
+	<button class="button">Start the Timer</button>
+	<div id="app"></div>
+
+	<script>
+		
+		/*Constructor - consisting of the selector, counter (timer) and template for the DOM
+		let Constructor = function (selector, options) {
+			this.elem = document.querySelector(selector);
+			this.counter = options.counter;
+			this.template = options.template;
+		};
+		*/
+
+		// Counter
+		var counter = {
+			time: 10,
+			countDown: function() {
+				if (counter.time > 0) {
+					console.log(counter.time);
+					display();
+					counter.time--;
+					// return this.time;
+				} else {
+						clearInterval(counter.timer);
+						counter.time = 'END';
+						console.log(counter.time);
+						return display();
+						counter.time = 10;
+					 	counter.start = false;
+						
+					};
+			},
+			// Start the timer
+			start: document.querySelector('button').addEventListener('click', function() {
+		
+				console.log(counter.start);
+				// counter.countDown();
+				var timer = window.setInterval(counter.countDown, 1000);
+				return this.timer;
+				}, false),
+			
+		};
+		
+
+		
+
+		
+
+		// Template to push counter into the DOM
+		var template = function () {
+			var html = '<p>' + 'Countdown has started...' + '</p>' +
+			'<h2><strong>' + counter.time + '</strong></h2>';
+			return html;
+		};	
+		
+		//Render into DOM
+		var display = function () {
+			document.querySelector("#app").innerHTML = template(counter.time);
+		};
+		
+		// let app = new Constructor('#app', {counter, template});
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timer</title>
+
+	<style type="text/css">
+		body {
+			margin: 1em auto;
+			max-width: 40em;
+			text-align: center;
+			width: 88%;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Timer</h1>
+
+	<div id="app"></div>
+
+	<script>
+        // State based design for a countdown timer
+        
+        // Global variables
+        var duration = 5;
+        var repeat; //to set intervall at which function is to be repated
+
+        //Object Constructor
+        var Constructor = function (selector, options) {
+            this.selector = document.querySelector(selector);
+            this.data = options.data;
+            this.template = options.template;
+        };
+
+        // Render a new UI
+        Constructor.prototype.render = function () {
+            console.log('render: ' + this.data);
+            this.selector.innerHTML = this.template(this.data);
+        };
+
+        
+        var countDown = function () {
+             
+            //countdown 1s
+             app.data.timer--;
+             console.log('app.data.timer: ' +app.data.timer);
+        
+            //check if more than 0s are left
+            if (app.data.timer < 1) {
+                resetCounter();
+            };
+            //Otherwise update UI
+            app.render();
+        };
+
+        var startCounter = function () {
+            app.data.timer = duration;
+            console.log('initital timer: ' + app.data.timer);
+            // app.render();
+            repeat = window.setInterval(countDown, 1000);
+        };
+
+        var resetCounter = function () {
+            window.clearInterval(repeat);
+            // app.render();
+            // app.data.timer = duration;
+        };
+
+        // Create new object using "new Constructor"
+        var app = new Constructor('#app', {
+                    data: {timer: duration
+                    },
+                    template: function (cond) {
+                        if (cond.timer < 1) {
+                            return '<p><button timer-restart>Restart Timer</button></p>';
+                        } else {
+                            //Otherwise show current time
+                            console.log('cond.timer: ' + cond.timer);
+                            return cond.timer;
+                        };
+                    }
+                });
+                console.log('app: ' + app); 
+
+        startCounter();
+        
+
+	</script>
+</body>
+</html>
